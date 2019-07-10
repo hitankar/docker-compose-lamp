@@ -7,7 +7,8 @@ RUN apt-get upgrade -y
 RUN apt-get -y install apt-utils nano wget dialog
 
 # Install important libraries
-RUN apt-get -y install --fix-missing apt-utils build-essential git curl libcurl3 libcurl3-dev zip openssl
+RUN apt-get -y install --fix-missing apt-utils build-essential git curl libcurl3 libcurl3-dev zip openssl gnupg2 sudo
+
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -46,3 +47,8 @@ RUN docker-php-ext-install -j$(nproc) gd
 
 # Enable apache modules
 RUN a2enmod rewrite headers
+
+RUN useradd -s /bin/bash docker -g www-data -G sudo -u 1000 docker
+
+USER docker
+RUN usermod -u 1000 www-data
