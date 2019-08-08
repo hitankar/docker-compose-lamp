@@ -46,3 +46,8 @@ RUN docker-php-ext-install -j$(nproc) gd
 
 # Enable apache modules
 RUN a2enmod rewrite headers
+
+RUN useradd -s /bin/bash docker -g www-data -G sudo -u 1000 docker
+
+USER docker
+RUN usermod -u 1000 www-data

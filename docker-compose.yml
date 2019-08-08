@@ -18,7 +18,7 @@ services:
       - ${LOG_DIR-./logs/apache2}:/var/log/apache2
   mysql:
     build: ./bin/mysql
-    container_name: '5.7-mysql'
+    container_name: '10.4-mariadb'
     restart: 'always'
     ports:
       - "${HOST_MACHINE_MYSQL_PORT}:3306"
