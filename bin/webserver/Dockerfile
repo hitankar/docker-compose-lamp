@@ -7,7 +7,7 @@ RUN apt-get upgrade -y
 RUN apt-get -y install apt-utils nano wget dialog
 
 # Install important libraries
-RUN apt-get -y install --fix-missing apt-utils build-essential git curl libcurl3 libcurl3-dev zip openssl
+RUN apt-get -y install --fix-missing apt-utils build-essential git curl libcurl4 libcurl4-openssl-dev zip openssl
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -22,9 +22,8 @@ RUN docker-php-ext-enable redis
 
 # Other PHP7 Extensions
 
-RUN apt-get -y install libsqlite3-dev libsqlite3-0 mysql-client
+RUN apt-get -y install mariadb-client
 RUN docker-php-ext-install pdo_mysql 
-RUN docker-php-ext-install pdo_sqlite
 RUN docker-php-ext-install mysqli
 
 RUN docker-php-ext-install curl
@@ -47,7 +46,6 @@ RUN docker-php-ext-install -j$(nproc) gd
 # Enable apache modules
 RUN a2enmod rewrite headers
 
-RUN useradd -s /bin/bash docker -g www-data -G sudo -u 1000 docker
+RUN useradd -s /bin/bash -g www-data -G sudo -u 1000 docker
 
 USER docker
-RUN usermod -u 1000 www-data
