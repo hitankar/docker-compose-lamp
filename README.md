@@ -6,6 +6,7 @@ This is a basic LAMP stack environment built using Docker Compose. It consists f
 * Apache 2.4
 * MySQL 5.7
 * phpMyAdmin
+* RabbitMQ
 
 ## Installation
 
@@ -15,7 +16,7 @@ Clone this repository on your local computer and switch to branch `7.2.x`. Run t
 git clone https://github.com/sprintcube/docker-compose-lamp.git
 cd docker-compose-lamp/
 git fetch --all
-git checkout 7.2.x
+git checkout 7.2.x-rabbitmq
 docker-compose up -d
 ```
 
